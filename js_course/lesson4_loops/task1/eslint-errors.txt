@@ -1,0 +1,10 @@
+Unexpected var , use let or const instead
+Expected '===' and instead saw '=='
+'c' is not defined
+Unarry operator '++' used
+Return statement should not contain assignment
+no-var
+eqeqeq
+no-undef
+no-plusplus
+no-return-assign
