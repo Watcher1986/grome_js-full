@@ -40,8 +40,7 @@ function updateTaskHandler(event) {
   if (!isChecked) {
     return;
   }
-  const idNum = event.target.dataset.id;
-  tasks[idNum].done = true;
+  tasks[event.target.dataset.id].done = event.target.checked;
   renderTasks(tasks);
 }
 
