@@ -35,6 +35,18 @@ const renderTasks = (tasksList) => {
 
 renderTasks(tasks);
 
+function updateTaskHandler(event) {
+  const isChecked = event.target.classList.contains('list__item-checkbox');
+  if (!isChecked) {
+    return;
+  }
+  const idNum = event.target.dataset.id;
+  tasks[idNum].done = true;
+  renderTasks(tasks);
+}
+
+listElem.addEventListener('click', updateTaskHandler);
+
 const createBtnElem = document.querySelector('.create-task-btn');
 const inputElem = document.querySelector('.task-input');
 
@@ -55,14 +67,3 @@ function createTaskHandler() {
 }
 
 createBtnElem.addEventListener('click', createTaskHandler);
-
-function updateTaskHandler(event) {
-  const isChecked = event.target.classList.contains('list__item-checkbox');
-  if (!isChecked) {
-    return;
-  }
-  const idNum = event.target.dataset.id;
-  tasks[idNum].done = true;
-}
-
-listElem.addEventListener('click', updateTaskHandler);
