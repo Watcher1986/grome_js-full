@@ -3,7 +3,7 @@ import { getItem } from './storage.js';
 const listElem = document.querySelector('.list');
 
 const compareTasks = (a, b) => {
-  const tasksList = getItem('taskList');
+  const tasksList = getItem('tasksList');
   if (tasksList.done) {
     return a.done - b.done;
   }
@@ -34,7 +34,7 @@ const createListItem = ({ text, done, id }) => {
 };
 
 export const renderTasks = () => {
-  const tasksList = getItem('taskList') || [];
+  const tasksList = getItem('tasksList') || [];
 
   listElem.innerHTML = '';
   const tasksElems = tasksList.sort(compareTasks).map(createListItem);
