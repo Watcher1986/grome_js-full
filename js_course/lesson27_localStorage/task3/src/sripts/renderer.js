@@ -3,19 +3,9 @@ import { getItem } from './storage.js';
 const listElem = document.querySelector('.list');
 
 const compareTasks = (a, b) => {
-  const tasksList = getItem('tasksList') || [];
-  // return tasksList.sort((a, b) =>
-  //   a.done - b.done;
-  //   // if (done) {
-  //   //   return b.done - a.done;
-  //   // }
-  //   // return new Date(b.createDate) - new Date(a.createDate);
-  // );
-
   if (a.done) {
-    return a.done - b.done;
+    return a.done - b.done || new Date(b.finishDate) - new Date(a.finishDate);
   }
-
   return new Date(b.createDate) - new Date(a.createDate);
 };
 
