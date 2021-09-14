@@ -2,7 +2,7 @@ import { renderTasks } from './renderer.js';
 import { getItem, setItem } from './storage.js';
 
 export const onCreateTask = () => {
-  const taskTitleInputElem = document.querySelector('.list_item');
+  const taskTitleInputElem = document.querySelector('.task-input');
 
   const text = taskTitleInputElem.value;
 
@@ -12,12 +12,14 @@ export const onCreateTask = () => {
   taskTitleInputElem.value = '';
   const tasksList = getItem('tasksList') || [];
 
-  const newTasksLIst = tasksList.concat({
+  const newTasksList = tasksList.concat({
     text,
     done: false,
     createDate: new Date().toISOString(),
     id: Math.random().toString(),
   });
-  setItem('tasksList', newTasksLIst);
+
+  setItem('tasksList', newTasksList);
+
   renderTasks();
 };
