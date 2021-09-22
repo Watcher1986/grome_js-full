@@ -19,12 +19,6 @@ const clearForm = () => {
   console.log(inputs);
 };
 
-const onFormChange = () => {
-  submitElem.disabled =
-    !inputs.every((input) => input.reportValidity()) && inputs.length >= 3;
-  errorElem.innerHTML = '';
-};
-
 const onEmailChange = () => {
   if (!emailInpElem.reportValidity()) {
     return;
@@ -74,7 +68,6 @@ const onFormSubmit = (event) => {
     .then((response) => {
       if (typeof response !== 'string') {
         alert(JSON.stringify(response));
-        submitElem.disabled = true;
         return clearForm();
       }
       return Promise.reject(response);
