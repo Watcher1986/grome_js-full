@@ -11,8 +11,15 @@ const submitElem = document.querySelector('.submit-button');
 
 const isAllValid = [];
 const errMessage = 'Failed to create user';
-const isEveryTrue = () =>
-  isAllValid.every((el) => el === true) && isAllValid.length >= 3;
+const isEveryTrue = () => {
+  if (
+    emailInpElem.reportValidity() &&
+    nameInpElem.reportValidity() &&
+    passwordInpElem.reportValidity()
+  ) {
+    submitElem.removeAttribute('disabled');
+  }
+};
 
 const clearForm = () => {
   inputs.forEach((input) => (input.value = ''));
@@ -20,41 +27,29 @@ const clearForm = () => {
 };
 
 const onEmailChange = () => {
-  if (!emailInpElem.reportValidity()) {
-    return;
-  }
-  isAllValid.push(true);
-  submitElem.disabled = !isEveryTrue();
+  isEveryTrue();
   errorElem.innerHTML = '';
 };
 
 const onUserNameChange = () => {
-  if (!nameInpElem.reportValidity()) {
-    return;
-  }
-  isAllValid.push(true);
-  submitElem.disabled = !isEveryTrue();
+  isEveryTrue();
   errorElem.innerHTML = '';
 };
 
 const onPasswordChange = () => {
-  if (!passwordInpElem.reportValidity()) {
-    return;
-  }
-  isAllValid.push(true);
-  submitElem.disabled = !isEveryTrue();
+  isEveryTrue();
   errorElem.innerHTML = '';
 };
 
 const getFormData = () => fetch(baseUrl).then((response) => response.json());
 
-const createFormData = (taskData) =>
+const createFormData = (formData) =>
   fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(taskData),
+    body: JSON.stringify(formData),
   });
 
 const onFormSubmit = (event) => {
