@@ -19,7 +19,6 @@ export const renderUserData = (userData) => {
   reposUrl = repos_url;
   userNameElem.textContent = name;
   userLocationElem.textContent = location ? `from ${location}` : '';
-  spinnerElem.style.display = 'none';
   return reposUrl;
 };
 
@@ -27,4 +26,5 @@ export const renderReposNames = (reposNames) => {
   const reposElems = reposNames.map(createRepoItem);
 
   repolistElem.append(...reposElems);
+  spinnerElem.style.display = 'none';
 };
