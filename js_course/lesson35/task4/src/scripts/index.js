@@ -1,26 +1,38 @@
-import { fetchUserData, fetchReposes } from './handlers.js';
-import { renderUserData, renderReposNames } from './renderers.js';
+import { fetchUserData, fetchReposes } from './gateways.js';
+import { renderUserData } from './user.js';
+import { renderReposNames, cleanReposList } from './repos.js';
+import { showSpinner, hideSpinner } from './spinner.js';
 
 const userAvatarElem = document.querySelector('.user__avatar');
 
 const showUserBtnElem = document.querySelector('.name-form__btn');
 const userNameInputElem = document.querySelector('.name-form__input');
 
-const defaultAvatar = 'https://avatars3.githubusercontent.com/u10001';
+const defaultUser = {
+  avatar_url: 'https://avatars3.githubusercontent.com/u10001',
+  name: '',
+  location: '',
+};
 
-userAvatarElem.src = defaultAvatar;
+renderUserData(defaultUser);
 
 const onSearchUser = () => {
+  showSpinner();
+  cleanReposList();
   const userName = userNameInputElem.value;
   fetchUserData(userName)
-    .then((userData) => renderUserData(userData))
-    .then((data) => fetchReposes(data))
-    .then((data) => renderReposNames(data))
-    .catch((error) => {
-      console.error(error.message);
-      return Promise.reject(new Error('Failed to load data'));
+    .then((userData) => {
+      renderUserData(userData);
+      return userData.repos_url;
     })
-    .catch((error) => alert(error.message));
+    .then((url) => fetchReposes(url))
+    .then((reposList) => {
+      renderReposNames(reposList);
+    })
+    .catch((error) => {
+      alert(error.message);
+    })
+    .finally(() => hideSpinner());
 };
 
 showUserBtnElem.addEventListener('click', onSearchUser);
