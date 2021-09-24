@@ -8,9 +8,11 @@ const fetchUser = async (USERID) => {
   return Promise.reject(new Error('Failed to load data'));
 };
 
-const getUsersBlogs = (usersIds) => {
+export const getUsersBlogs = (usersIds) => {
   const usersLinks = usersIds.map((usId) => fetchUser(usId));
   return Promise.all(usersLinks);
 };
 
-getUsersBlogs(ids).then((linksList) => console.log(linksList));
+// test data
+
+// getUsersBlogs(ids).then((linksList) => console.log(linksList));
