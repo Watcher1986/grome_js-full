@@ -3,13 +3,7 @@ import { setItem } from './storage.js';
 import { deleteTask, getTasksList } from './tasksGateway.js';
 
 export const onDeleteTask = (e) => {
-  const isCheckOnDel = document.querySelector('list__item-delete_btn');
-
-  if (!isCheckOnDel) {
-    return;
-  }
-
-  const taskId = e.taget.closest('list__item-checkbox').dataset.id;
+  const taskId = e.target.closest('.list__item').dataset.id;
   console.log(taskId);
 
   deleteTask(taskId)

@@ -12,7 +12,6 @@ const compareTasks = (a, b) => {
 const createCheckbox = ({ done, id }) => {
   const checkboxElem = document.createElement('input');
   checkboxElem.setAttribute('type', 'checkbox');
-  checkboxElem.setAttribute('data-id', id);
   checkboxElem.checked = done;
   checkboxElem.classList.add('list__item-checkbox');
 
@@ -22,6 +21,7 @@ const createCheckbox = ({ done, id }) => {
 const createListItem = ({ text, done, id }) => {
   const listItemElem = document.createElement('li');
   listItemElem.classList.add('list__item');
+  listItemElem.setAttribute('data-id', id);
   const checkboxElem = createCheckbox({ done, id });
 
   const textElem = document.createElement('span');
@@ -30,10 +30,6 @@ const createListItem = ({ text, done, id }) => {
   if (done) {
     textElem.classList.add('item_done');
   }
-
-  // const textElem = document.createElement('span');
-  // textElem.classList.add('list__item-text');
-  // textElem.textContent = text;
 
   const deleteBtnElem = document.createElement('button');
   deleteBtnElem.classList.add('list__item-delete_btn');

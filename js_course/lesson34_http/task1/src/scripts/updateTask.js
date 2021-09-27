@@ -1,32 +1,13 @@
 import { renderTasks } from './renderer.js';
 import { getItem, setItem } from './storage.js';
-import { getTasksList, updateTask } from './tasksGateway.js';
+import { getTasksList, updateTask, deleteTask } from './tasksGateway.js';
 
 export const onToggleTask = (e) => {
-  const isCheckbox = e.target.classList.contains('list__item-checkbox');
-
-  if (!isCheckbox) {
-    return;
-  }
-
-  // const isCheckOnDel = document.querySelector('list__item-delete_btn');
-
-  // if (!isCheckOnDel) {
-  //   return;
-  // }
-
-  const taskId = e.target.dataset.id;
-  // const done = e.target.checked;
-
-  // deleteTask(taskId)
-  //   .then(() => getTasksList())
-  //   .then((updatedTasksList) => setItem('tasksList', updatedTasksList));
-  // renderTasks();
-
   const tasksList = getItem('tasksList');
+  const taskId = e.target.closest('.list__item').dataset.id;
+
   const { text, createDate } = tasksList.find((task) => task.id === taskId);
   const done = e.target.checked;
-  console.log(tasksList);
   const updatedTask = {
     text,
     createDate,

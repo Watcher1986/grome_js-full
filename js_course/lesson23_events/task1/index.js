@@ -43,6 +43,7 @@ const onFormSubmit = (event) => {
     (acc, [field, value]) => ({ ...acc, [field]: value }),
     {}
   );
+  console.log(formData);
   alert(JSON.stringify(formData));
 };
 
